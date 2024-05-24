@@ -1,6 +1,14 @@
+import {  Outlet } from "react-router-dom"
+import Navbar from "./components/Navbar"
+
 function App() {
   return (
-   <h1 className="text-3xl text-blue-500">Hello Wrold</h1>
+   <>
+    <Navbar/>
+   <div className="p-5 bg-[#f1f1f1] h-screen">
+    <Outlet/>
+   </div>
+   </>
   )
 }
 
