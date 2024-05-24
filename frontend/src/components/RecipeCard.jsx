@@ -1,3 +1,5 @@
+import Ingredients from "./Ingredients";
+
 export default function RecipeCard({recipe}) {
   return (
     <div className="bg-white p-5 rounded-2xl space-y-3">
@@ -5,10 +7,7 @@ export default function RecipeCard({recipe}) {
     <p>Description</p>
     <p>{recipe.description}</p>
     <div className="space-x-2">
-        <span>Ingredients -</span>
-        {!!recipe.ingredients.length && recipe.ingredients.map((ingredient,i)=>(
-        <span className="bg-orange-400 text-white px-2 py-1 text-sm rounded-full" key={i}>{ingredient}</span>
-        ))}
+        <Ingredients ingredients={recipe.ingredients}/>
     </div>
     <p className="text-gray-500">Published at - {recipe.createdAt}</p>
 </div>
