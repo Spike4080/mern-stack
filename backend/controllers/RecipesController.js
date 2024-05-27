@@ -10,7 +10,34 @@ const RecipesController = {
       .skip((page - 1) * limit)
       .limit(limit)
       .sort({ createdAt: -1 });
-    return res.json(recipes);
+
+    let totalRecipesCount = await Recipe.countDocuments();
+
+    let totalPagesCount = Math.ceil(totalRecipesCount / limit);
+    console.log(totalPagesCount);
+
+    // backend info (hashcode)
+    let links = {
+      nextPage: totalPagesCount == page ? false : true,
+      previousPage: page == 1 ? false : true,
+      currentPage: page,
+      loopableLinks: [],
+    };
+
+    console.log(links.previousPage);
+
+    // generate loopableLinks array
+    for (let index = 0; index < totalPagesCount; index++) {
+      let number = index + 1;
+      links.loopableLinks.push({ number });
+    }
+
+    let response = {
+      links,
+      data: recipes,
+    };
+
+    return res.json(response);
   },
 
   store: async (req, res) => {

@@ -6,47 +6,39 @@ import {useLocation} from 'react-router-dom'
 
 export default function Home() {
     let [recipes,setRecipes] = useState([]);
+    let [links,setLinks] = useState(null);
 
     let location = useLocation();
     let searchQuery = new URLSearchParams(location.search);
-    let page = searchQuery.get('page');
+    let page = searchQuery.get('page'); // string
+    page = parseInt(page); // int
 
-    console.log(page);
+
     useEffect(()=>{
         let fetchRecipes = async()=>{
         let response = await fetch('http://localhost:4000/api/recipes?page='+page);
         if(response.ok){
             let data = await response.json();
-            setRecipes(data);
+            setLinks(data.links);
+            setRecipes(data.data);
 
             // scroll to top 
-            window.scroll({top:100,left:100,behavior:'smooth'});
+            window.scroll({top:0,left:0,behavior:'smooth'});
         }
         }
 
         fetchRecipes();
     },[page])
 
-    // backend info (hashcode)
-    let links = {
-            nextPage : true ,
-            previousPage : true,
-            currentPage : 1,
-            loopableLinks : [
-                {number:1},
-                {number:2},
-                {number:3}
-            ]
-        }
     
 
   return (
     <div className="space-y-3">
-        {recipes.length && (recipes.map(recipe=>(
-            <RecipeCard key={recipe.id} recipe={recipe}/>
+        {!!recipes.length && (recipes.map(recipe=>(
+            <RecipeCard key={recipe._id} recipe={recipe}/>
         ))
         )}
-        <Pagination links={links} page={page}/>
+        {!!links &&<Pagination links={links} page={page || 1}/>}
     </div>
   )
 }

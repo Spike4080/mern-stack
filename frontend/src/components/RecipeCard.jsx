@@ -1,9 +1,14 @@
 import Ingredients from "./Ingredients";
+import axios from 'axios'
 
 export default function RecipeCard({recipe}) {
+
   return (
     <div className="bg-white p-5 rounded-2xl space-y-3">
-    <h3 className="text-xl font-bold text-orange-400">{recipe.title}</h3>
+    <div className="flex justify-between items-center">
+      <h3 className="text-xl font-bold text-orange-400">{recipe.title}</h3>
+      
+    </div>
     <p>Description</p>
     <p>{recipe.description}</p>
     <div className="space-x-2">
