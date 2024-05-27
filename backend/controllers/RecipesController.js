@@ -14,9 +14,7 @@ const RecipesController = {
     let totalRecipesCount = await Recipe.countDocuments();
 
     let totalPagesCount = Math.ceil(totalRecipesCount / limit);
-    console.log(totalPagesCount);
 
-    // backend info (hashcode)
     let links = {
       nextPage: totalPagesCount == page ? false : true,
       previousPage: page == 1 ? false : true,

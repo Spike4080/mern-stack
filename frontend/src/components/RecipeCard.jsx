@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Ingredients from "./Ingredients";
 import axios from 'axios'
 
@@ -12,7 +13,10 @@ export default function RecipeCard({recipe,onDeleted}) {
     <div className="bg-white p-5 rounded-2xl space-y-3">
     <div className="flex justify-between items-center">
       <h3 className="text-xl font-bold text-orange-400">{recipe.title}</h3>
+      <div className="space-x-2">
       <button onClick={deleteRecipe} className="bg-red-500 px-2 py-1 rounded-lg text-white text-sm">Delete</button>
+      <Link to={`/recipes/edit/${recipe._id}`} className="bg-yellow-500 px-4 py-2 rounded-lg text-black text-sm">Edit</Link>
+      </div>
     </div>
     <p>Description</p>
     <p>{recipe.description}</p>
