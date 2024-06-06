@@ -69,9 +69,10 @@ export default function RecipeForm() {
             </ul>
             <input type="text" placeholder="Recipe Title"  className="w-full p-1" value={title} onChange={e=>setTitle(e.target.value)}/>
             <textarea rows="5" className="w-full p-1" placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)}></textarea>
+            <label className="block text-slate-500">Add atleast 3 ingredients</label>
            <div className="flex space-x-2 items-center">
            <input value={newIngredients} onChange={e=>setnewIngredients(e.target.value)} type="text" placeholder="Recipe Ingredient"  className="w-full p-1"/>
-            <img src={plus} alt="" className="cursor-pointer" onClick={addIngredient}/>
+            {!!newIngredients.length  && <img src={plus} alt="" className="cursor-pointer" onClick={addIngredient}/>}
            </div>
            <div>
             <Ingredients ingredients={ingredients}/>

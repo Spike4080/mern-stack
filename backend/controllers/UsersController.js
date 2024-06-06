@@ -1,5 +1,6 @@
 const User = require("../models/User");
 let bcrypt = require("bcrypt");
+const createToken = require("../helpers/createToken");
 
 const UsersController = {
   login: (req, res) => {
@@ -9,7 +10,13 @@ const UsersController = {
     try {
       let { name, email, password } = req.body;
       let user = await User.register(name, email, password);
-      return res.json(user);
+      // create token
+      let token = createToken(user._id);
+      res.cookie("jwt", token, {
+        httpOnly: true,
+        maxAge: 3 * 24 * 60 * 60 * 1000,
+      });
+      return res.json({ user, token });
     } catch (e) {
       return res.status(400).json({ error: e.message });
     }
