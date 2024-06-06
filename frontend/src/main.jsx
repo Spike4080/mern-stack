@@ -10,7 +10,9 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import RecipeForm from './pages/RecipeForm.jsx';
-import SignupForm from './pages/SignupForm.jsx';
+import SignUpForm from './pages/SignUpForm.jsx';
+import SignInForm from './pages/SignInForm.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -40,7 +42,11 @@ const router = createBrowserRouter([
       },
       {
         path:"/sign-up",
-        element: <SignupForm/>
+        element: <SignUpForm/>
+      },
+      {
+        path:"/sign-in",
+        element: <SignInForm/>
       }
     ]
   },
