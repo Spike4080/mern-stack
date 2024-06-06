@@ -18,7 +18,12 @@ mongoose.connect(mongoURL).then(() => {
   ``;
 });
 
-app.use(cors()); // local development -- WARNING---
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+); // local development -- WARNING---
 app.use(express.json()); //parse json data
 app.use(morgan("dev"));
 app.use(cookieParser());
