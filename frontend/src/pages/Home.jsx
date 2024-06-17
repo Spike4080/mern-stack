@@ -24,7 +24,7 @@ export default function Home() {
             setRecipes(data.data);
 
             // scroll to top 
-            window.scrollTo({top:100,left:100,behavior:'smooth'});
+            window.scrollTo({top:0,left:0,behavior:'smooth'});
         }
         }
 

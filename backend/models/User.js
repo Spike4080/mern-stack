@@ -15,7 +15,7 @@ const UserSchema = new Schema(
       unique: true,
     },
     password: {
-      type: Array,
+      type: String,
       required: true,
     },
   },
@@ -36,7 +36,21 @@ UserSchema.statics.register = async function (name, email, password) {
     email,
     password: hashValue,
   });
+
   return user;
+};
+
+UserSchema.statics.login = async function (email, password) {
+  let user = await this.findOne({ email });
+  if (!user) {
+    throw new Error("user does not exists");
+  }
+  let isCorrect = await bcrypt.compare(password, user.password);
+  if (isCorrect) {
+    return user;
+  } else {
+    throw new Error("Password incorrect");
+  }
 };
 
 module.exports = mongoose.model("User", UserSchema);
